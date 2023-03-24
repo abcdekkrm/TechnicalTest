@@ -26,6 +26,7 @@ function UserList() {
   }
   const getUser = (id) => {
     console.log(id);
+    window.location.href = '/users/'+id;
   }
   const handleMouseEnter = (id) => {
     document.getElementById(id+"user").style.backgroundColor = 'gray';
@@ -38,6 +39,7 @@ function UserList() {
     document.getElementById(id+"user").style.color = null;
     document.getElementById(id+"user").style.cursor = null;
   };
+
   // const randomColors = () => {
   //   for (int = 0; i < 26; i++) {
   //     colors.push(Math.floor(Math.random()*16777215).toString(16));

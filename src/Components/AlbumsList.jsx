@@ -18,6 +18,16 @@ function AlbumsList() {
     .then((response) => response.json())
     .then((json) => {setAlbums(json);});
   }
+  function lookAlbum(id) {
+    window.location.href = '/albums/'+id;
+  }
+  const handleMouseEnter = (id) => {
+    document.getElementById(id+"album").style.cursor = 'pointer';
+ };
+ 
+  const handleMouseLeave = (id) => {
+    document.getElementById(id+"album").style.cursor = null;
+  };
   return(
     <>
       <List sx={{ width: '100%', height: 'calc((100vh - 150px)/2)', borderRadius: '5px', maxWidth: 300, bgcolor: 'background.paper', overflow: 'scroll', position: 'sticky', top: 'calc((100vh - 150px)/2.5 + 90px)' }}>
@@ -29,11 +39,11 @@ function AlbumsList() {
             {(album.id !== 1)? <Divider variant="inset" component="li" />:null}
             <ListItem
               alignItems="flex-start"
-              key={album.id+"Albums"}
-              id={album.id+"Albums"}
-              // onMouseEnter={() => handleMouseEnter(Albums.id)}
-              // onMouseLeave={() => handleMouseLeave(Albums.id)}
-              // onClick={() => getAlbums(Albums.id)}
+              key={album.id+"album"}
+              id={album.id+"album"}
+              onMouseEnter={() => handleMouseEnter(album.id)}
+              onMouseLeave={() => handleMouseLeave(album.id)}
+              onClick={() => lookAlbum(album.id)}
             >
               <ListItemAvatar>
                 {/* <Avatar sx ={{backgroundColor: red[500]}}>{Array.from(Albums.Albumsname)[0]}</Avatar> */}
