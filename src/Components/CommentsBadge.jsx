@@ -12,7 +12,6 @@ function CommentsBadge(props) {
     await fetch(`https://jsonplaceholder.typicode.com/posts/${props.postId}/comments`)
     .then((response) => response.json())
     .then((json) => {setComments(json);});
-    console.log(comments);
   }
   return(
     <>

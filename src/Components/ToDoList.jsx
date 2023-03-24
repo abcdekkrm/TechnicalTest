@@ -6,7 +6,8 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import { blue } from '@mui/material/colors';
+import PendingActionsIcon from '@mui/icons-material/PendingActions';
+import Owner from "./Owner";
 
 function ToDoList() {
   const [toDos, setToDos] = React.useState([]);
@@ -20,7 +21,7 @@ function ToDoList() {
   }
   return(
     <>
-      <List sx={{ width: '100%', height: 'calc((100vh - 150px)/2)', borderRadius: '5px', maxWidth: 300, bgcolor: 'background.paper', overflow: 'scroll', position: 'sticky', top: '70px' }}>
+      <List sx={{ width: '100%', height: 'calc((100vh - 150px)/2.5)', borderRadius: '5px', maxWidth: 300, bgcolor: 'background.paper', overflow: 'scroll', position: 'sticky', top: '70px' }}>
         {toDos?.map((todo) => (
           // if (todo.id !== 1) {
           //   setIsFirst(false);
@@ -37,32 +38,34 @@ function ToDoList() {
             >
               <ListItemAvatar>
                 {/* <Avatar sx ={{backgroundColor: red[500]}}>{Array.from(todo.todoname)[0]}</Avatar> */}
-                <Avatar sx={{ bgcolor: blue[700] }} aria-label="recipe">
+                <Avatar aria-label="recipe">
                   {/* {Array.from(todo.todoname)[0]} */}
+                  <PendingActionsIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
                 primary={todo.title}
                 secondary={
                   <React.Fragment>
+                    <Owner userId={todo.userId} />
                     {todo.completed
                       ?
                       <Typography
                         sx={{ display: 'inline' }}
                         component="span"
                         variant="body2"
-                        color="text.primary"
+                        color="#0152F0"
                       >
-                        done
+                        {'\n- done'}
                       </Typography>
                       :
                       <Typography
                         sx={{ display: 'inline' }}
                         component="span"
                         variant="body2"
-                        color="red"
+                        color="#F03513"
                       >
-                        not done
+                        {'\n- not done'}
                       </Typography>
                     }
                   </React.Fragment>

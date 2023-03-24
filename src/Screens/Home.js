@@ -1,4 +1,5 @@
 import React from "react";
+import AlbumsList from "../Components/AlbumsList";
 // import PersonIcon from '@mui/icons-material/Person';
 import PostList from "../Components/PostList";
 import ToDoList from "../Components/ToDoList";
@@ -33,10 +34,13 @@ function Home() {
           <UserList />
         </div> */}
 
-        <div style={{ paddingTop: '80px', paddingBottom: '20px', display: 'flex', gap: '20px', justifyContent: 'center' }}>
+        <div style={{ paddingTop: '85px', paddingBottom: '20px', display: 'flex', gap: '20px', justifyContent: 'center' }}>
           <UserList />
           <PostList />
-          <ToDoList />
+          <div style={{display: 'flex', flexDirection: 'column', gap: '20px'}}>
+            <ToDoList />
+            <AlbumsList />
+          </div>
         </div>
         {/* <div style={{marginLeft: '700px', paddingTop: '80px', paddingBottom: '20px'}}> */}
         {/* </div> */}
