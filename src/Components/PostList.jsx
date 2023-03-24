@@ -6,13 +6,13 @@ import React, {useEffect} from "react";
 // import ListItemAvatar from '@mui/material/ListItemAvatar';
 // import Avatar from '@mui/material/Avatar';
 // import Typography from '@mui/material/Typography';
-// import { styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 // import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-// import Collapse from '@mui/material/Collapse';
+import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -22,11 +22,17 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 // import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CommentIcon from '@mui/icons-material/Comment';
+import PostComments from "./PostComments";
 // import Badge from '@mui/material/Badge';
 
 function PostList() {
   const [users, setUsers] = React.useState([]);
   const [posts, setPosts] = React.useState([]);
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
   // const [isFirst, setIsFirst] = React.useState(true);
   useEffect(() => {
     getUsers();
@@ -60,16 +66,16 @@ function PostList() {
   //   console.log(name);
   //   return id;
   // }
-  // const ExpandMore = styled((props) => {
-  //   const { expand, ...other } = props;
-  //   return <IconButton {...other} />;
-  // })(({ theme, expand }) => ({
-  //   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  //   marginLeft: 'auto',
-  //   transition: theme.transitions.create('transform', {
-  //     duration: theme.transitions.duration.shortest,
-  //   }),
-  // }));
+  const ExpandMore = styled((props) => {
+    const { expand, ...other } = props;
+    return <IconButton {...other} />;
+  })(({ theme, expand }) => ({
+    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
+  }));
   return(
     <>
       {/* <List sx={{ width: '100%', borderRadius: '5px', maxWidth: '500px', bgcolor: 'background.paper', overflow: 'scroll', marginLeft: '20px' }}>
@@ -170,9 +176,9 @@ function PostList() {
                   <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
                   </IconButton>
-                  <IconButton aria-label="comment">
+                  {/* <IconButton aria-label="comment">
                     <CommentIcon />
-                  </IconButton>
+                  </IconButton> */}
                   {/* <Badge badgeContent={4} color="primary">
                     <CommentIcon sx={{ fill: '#757576' }}/>
                   </Badge> */}
@@ -184,9 +190,18 @@ function PostList() {
                   >
                     <ExpandMoreIcon />
                   </ExpandMore> */}
+                  <ExpandMore
+                    expand={expanded}
+                    onClick={handleExpandClick}
+                    aria-expanded={expanded}
+                    aria-label="show more"
+                  >
+                    <CommentIcon />
+                  </ExpandMore>
                 </CardActions>
-                {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-                  <CardContent>
+                <Collapse in={expanded} timeout="auto" unmountOnExit>
+                  <PostComments postId={post.id} />
+                  {/* <CardContent>
                     <Typography paragraph>Method:</Typography>
                     <Typography paragraph>
                       Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
@@ -212,8 +227,8 @@ function PostList() {
                     <Typography>
                       Set aside off of the heat to let rest for 10 minutes, and then serve.
                     </Typography>
-                  </CardContent>
-                </Collapse> */}
+                  </CardContent> */}
+                </Collapse>
               </Card>
             </>);
           }
