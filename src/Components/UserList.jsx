@@ -49,7 +49,7 @@ function UserList() {
 
   // }
   return (
-    <List sx={{ width: '100%', height: 'calc(100vh - 150px)', borderRadius: '5px', maxWidth: 300, bgcolor: 'background.paper', overflow: 'scroll', marginLeft: '20px' }}>
+    <List sx={{ width: '100%', height: 'calc(100vh - 150px)', borderRadius: '5px', maxWidth: 300, bgcolor: 'background.paper', overflow: 'scroll', position: 'sticky', top: '70px' }}>
       {users?.map((user) => (
         // if (user.id !== 1) {
         //   setIsFirst(false);

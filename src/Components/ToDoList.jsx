@@ -9,48 +9,62 @@ import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 
 function ToDoList() {
+  const [toDos, setToDos] = React.useState([]);
+  useEffect(() => {
+    getToDos();
+  });
+  async function getToDos() {
+    await fetch('https://jsonplaceholder.typicode.com/todos')
+    .then((response) => response.json())
+    .then((json) => {setToDos(json);});
+  }
   return(
     <>
-      <List sx={{ width: '100%', height: 'calc(100vh - 150px)', borderRadius: '5px', maxWidth: 300, bgcolor: 'background.paper', overflow: 'scroll', marginLeft: '20px' }}>
-        {users?.map((user) => (
-          // if (user.id !== 1) {
+      <List sx={{ width: '100%', height: 'calc((100vh - 150px)/2)', borderRadius: '5px', maxWidth: 300, bgcolor: 'background.paper', overflow: 'scroll', position: 'sticky', top: '70px' }}>
+        {toDos?.map((todo) => (
+          // if (todo.id !== 1) {
           //   setIsFirst(false);
           // }
           <>
-            {(user.id !== 1)? <Divider variant="inset" component="li" />:null}
+            {(todo.id !== 1)? <Divider variant="inset" component="li" />:null}
             <ListItem
               alignItems="flex-start"
-              key={user.id+"user"}
-              id={user.id+"user"}
-              onMouseEnter={() => handleMouseEnter(user.id)}
-              onMouseLeave={() => handleMouseLeave(user.id)}
-              onClick={() => getUser(user.id)}
+              key={todo.id+"todo"}
+              id={todo.id+"todo"}
+              // onMouseEnter={() => handleMouseEnter(todo.id)}
+              // onMouseLeave={() => handleMouseLeave(todo.id)}
+              // onClick={() => gettodo(todo.id)}
             >
               <ListItemAvatar>
-                {/* <Avatar sx ={{backgroundColor: red[500]}}>{Array.from(user.username)[0]}</Avatar> */}
+                {/* <Avatar sx ={{backgroundColor: red[500]}}>{Array.from(todo.todoname)[0]}</Avatar> */}
                 <Avatar sx={{ bgcolor: blue[700] }} aria-label="recipe">
-                  {Array.from(user.username)[0]}
+                  {/* {Array.from(todo.todoname)[0]} */}
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
-                primary={user.username}
+                primary={todo.title}
                 secondary={
                   <React.Fragment>
-                    <Typography
-                      sx={{ display: 'inline' }}
-                      component="span"
-                      variant="body2"
-                      color="text.primary"
-                    >
-                      {user.name}
-                    </Typography>
-                    <Typography
-                      // component="span"
-                      variant="body2"
-                      color="text.primary"
-                    >
-                      {user.email}
-                    </Typography>
+                    {todo.completed
+                      ?
+                      <Typography
+                        sx={{ display: 'inline' }}
+                        component="span"
+                        variant="body2"
+                        color="text.primary"
+                      >
+                        done
+                      </Typography>
+                      :
+                      <Typography
+                        sx={{ display: 'inline' }}
+                        component="span"
+                        variant="body2"
+                        color="red"
+                      >
+                        not done
+                      </Typography>
+                    }
                   </React.Fragment>
                 }
               />

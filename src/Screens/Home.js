@@ -1,6 +1,7 @@
 import React from "react";
 // import PersonIcon from '@mui/icons-material/Person';
 import PostList from "../Components/PostList";
+import ToDoList from "../Components/ToDoList";
 import UserList from "../Components/UserList";
 
 function Home() {
@@ -22,19 +23,23 @@ function Home() {
       {/* <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', paddingTop: '80px', backgroundColor: '#00395E' }}> */}
       <div style={{width: '100vw', backgroundColor: '#B1D6ED', zIndex: '-2'}}>
         {/* <div style={{ fontSize: 40, color: 'white', marginRight: '30px', fontWeight: 'bold' }}>Users</div> */}
-        <div style={{position: 'fixed', paddingTop: '80px', display: 'flex', flexDirection: 'column', gap: '10px'}}>
-          {/* <div style={{paddingLeft: '20px', fontSize: '20px', color: ''}}>
+        {/* <div style={{position: 'fixed', paddingTop: '80px', display: 'flex', flexDirection: 'column', gap: '10px'}}>
+          <div style={{paddingLeft: '20px', fontSize: '20px', color: ''}}>
             <div style={{display: 'flex', alignItems: 'center'}}>
             <PersonIcon sx={{fill: 'white'}}/>
               <div>users</div>
             </div>
-          </div> */}
+          </div>
           <UserList />
-        </div>
-        <div style={{marginLeft: '350px', paddingTop: '80px', paddingBottom: '20px'}}>
+        </div> */}
+
+        <div style={{ paddingTop: '80px', paddingBottom: '20px', display: 'flex', gap: '20px', justifyContent: 'center' }}>
+          <UserList />
           <PostList />
+          <ToDoList />
         </div>
-        <div></div>
+        {/* <div style={{marginLeft: '700px', paddingTop: '80px', paddingBottom: '20px'}}> */}
+        {/* </div> */}
       </div>
       {/* </div> */}
     </>
