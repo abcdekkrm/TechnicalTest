@@ -8,42 +8,42 @@ import React, {useEffect} from "react";
 // import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
+// import CardHeader from '@mui/material/CardHeader';
 // import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 // import ShareIcon from '@mui/icons-material/Share';
 // import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import CommentIcon from '@mui/icons-material/Comment';
+// import MoreVertIcon from '@mui/icons-material/MoreVert';
+// import CommentIcon from '@mui/icons-material/Comment';
 import PostComments from "./PostComments";
+import UserHeader from "./UserHeader";
+import CommentsBadge from "./CommentsBadge";
 // import Badge from '@mui/material/Badge';
 
 function PostList() {
-  const [users, setUsers] = React.useState([]);
+  // const [users, setUsers] = React.useState([]);
   const [posts, setPosts] = React.useState([]);
   const [expandIndex, setExpandIndex] = React.useState(-1);
 
   // const [isFirst, setIsFirst] = React.useState(true);
   useEffect(() => {
-    getUsers();
+    // getUsers();
     getPosts();
   });
-  function getPosts() {
-    fetch('https://jsonplaceholder.typicode.com/posts')
+  // async function getUsers() {
+  //   await fetch('https://jsonplaceholder.typicode.com/users')
+  //   .then((response) => response.json())
+  //   .then((json) => {setUsers(json);});
+  // }
+  async function getPosts() {
+    await fetch('https://jsonplaceholder.typicode.com/posts')
     .then((response) => response.json())
     .then((json) => {setPosts(json);});
-  }
-  function getUsers() {
-    fetch('https://jsonplaceholder.typicode.com/users')
-    .then((response) => response.json())
-    .then((json) => {setUsers(json);});
   }
   const handleMouseEnter = (id) => {
     // document.getElementById(id+"user").style.backgroundColor = 'gray';
@@ -63,7 +63,13 @@ function PostList() {
   //   console.log(name);
   //   return id;
   // }
-
+  const handleLike = (id) => {
+    if(document.getElementById(id+"like").style.fill !== 'red') {
+      document.getElementById(id+"like").style.fill = 'red';
+    } else {
+      document.getElementById(id+"like").style.fill = null;
+    }
+  }
   const handleExpandClick = (id) => {
     if (expandIndex === id) {
       setExpandIndex(-1);
@@ -80,7 +86,7 @@ function PostList() {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
   })(({ theme, expand }) => ({
-    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+    // transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
     marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.shortest,
@@ -146,7 +152,7 @@ function PostList() {
       <div style={{display: 'flex', flexDirection: 'column', gap: '20px'}}>
         {posts?.map(
           (post) => {
-            const user = users[post.userId - 1];
+            // const user = users[post.userId - 1];
             return (
             <>
               <Card
@@ -156,7 +162,7 @@ function PostList() {
                 onMouseEnter={() => handleMouseEnter(post.id)}
                 onMouseLeave={() => handleMouseLeave(post.id)}
               >
-                <CardHeader
+                {/* <CardHeader
                   avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
                       {Array.from(user.username)[0]}
@@ -170,7 +176,8 @@ function PostList() {
                   // titleTypographyProps={{variant:'h6' }}
                   title={post.title}
                   subheader={user.username}
-                />
+                /> */}
+                <UserHeader postTitle={post.title} userId={post.userId}/>
                 {/* <CardMedia
                   component="img"
                   height="194"
@@ -183,8 +190,8 @@ function PostList() {
                   </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
-                  <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
+                  <IconButton aria-label="add to favorites" onClick={() => handleLike(post.id)}>
+                    <FavoriteIcon id={post.id+"like"}/>
                   </IconButton>
                   {/* <IconButton aria-label="comment">
                     <CommentIcon />
@@ -209,7 +216,8 @@ function PostList() {
                     aria-expanded={post.id === expandIndex}
                     aria-label="show more"
                   >
-                    <CommentIcon />
+                    {/* <CommentIcon /> */}
+                    <CommentsBadge postId={post.id} />
                   </ExpandMore>
                 </CardActions>
                 <Collapse id={post.id+"collapse"} in={post.id === expandIndex} timeout="auto" unmountOnExit>

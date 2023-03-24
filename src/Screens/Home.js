@@ -31,9 +31,10 @@ function Home() {
           </div> */}
           <UserList />
         </div>
-        <div style={{marginLeft: '400px', paddingTop: '80px', paddingBottom: '20px'}}>
+        <div style={{marginLeft: '350px', paddingTop: '80px', paddingBottom: '20px'}}>
           <PostList />
         </div>
+        <div></div>
       </div>
       {/* </div> */}
     </>
