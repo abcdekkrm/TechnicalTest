@@ -28,11 +28,8 @@ import PostComments from "./PostComments";
 function PostList() {
   const [users, setUsers] = React.useState([]);
   const [posts, setPosts] = React.useState([]);
-  const [expanded, setExpanded] = React.useState(false);
+  const [expandIndex, setExpandIndex] = React.useState(-1);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
   // const [isFirst, setIsFirst] = React.useState(true);
   useEffect(() => {
     getUsers();
@@ -66,6 +63,19 @@ function PostList() {
   //   console.log(name);
   //   return id;
   // }
+
+  const handleExpandClick = (id) => {
+    if (expandIndex === id) {
+      setExpandIndex(-1);
+    } else {
+      setExpandIndex(id);
+    }
+    // setExpanded(!expanded);
+    // document.getElementById(id+"expand").expand = !document.getElementById(id+"expand").expand;
+    // document.getElementById(id+"expand").ariaExpanded = !document.getElementById(id+"expand").ariaExpanded;
+    // document.getElementById(id+"collapse").in = !document.getElementById(id+"collapse").in;
+    // console.log(document.getElementById(id+"collapse"));
+  };
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -191,15 +201,18 @@ function PostList() {
                     <ExpandMoreIcon />
                   </ExpandMore> */}
                   <ExpandMore
-                    expand={expanded}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
+                    // id={post.id+"expand"}
+                    // expand={expanded}
+                    expand={post.id === expandIndex}
+                    onClick={() => handleExpandClick(post.id)}
+                    // aria-expanded={expanded}
+                    aria-expanded={post.id === expandIndex}
                     aria-label="show more"
                   >
                     <CommentIcon />
                   </ExpandMore>
                 </CardActions>
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
+                <Collapse id={post.id+"collapse"} in={post.id === expandIndex} timeout="auto" unmountOnExit>
                   <PostComments postId={post.id} />
                   {/* <CardContent>
                     <Typography paragraph>Method:</Typography>
