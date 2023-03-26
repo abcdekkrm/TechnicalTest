@@ -9,8 +9,10 @@ import Divider from '@mui/material/Divider';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import { green } from '@mui/material/colors';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function PostComments(props) {
+  const [loding, setLoding] = React.useState(true);
   const [comments, setComments] = React.useState([]);
   useEffect(() => {
     getComments();
@@ -18,12 +20,19 @@ function PostComments(props) {
   function getComments() {
     fetch(`https://jsonplaceholder.typicode.com/posts/${props.postId}/comments`)
     .then((response) => response.json())
-    .then((json) => {setComments(json);});
+    .then((json) => {setLoding(false); setComments(json);});
   }
   return (
     <>
       <CardContent>
-        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+        {loding
+          ?
+          <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
+            <CircularProgress color="inherit" />
+          </div>
+          : null
+        }
+        <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
           {comments?.map((comment) => {
             return(
               <>
@@ -35,6 +44,7 @@ function PostComments(props) {
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
+                    primaryTypographyProps={{variant:'h6'}} 
                     primary={comment.name}
                     secondary={
                       <React.Fragment>
@@ -49,7 +59,7 @@ function PostComments(props) {
                         <Typography
                           // component="span"
                           variant="body2"
-                          color="text.primary"
+                          color="whitesmike"
                         >
                           {comment.body}
                         </Typography>

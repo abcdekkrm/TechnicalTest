@@ -6,6 +6,7 @@ import Nav from './Components/Nav'
 import Home from './Screens/Home';
 import User from './Screens/User';
 import Album from './Screens/Album';
+import Post from './Screens/Post';
 // import { Switch } from '@material-ui/core';
 
 function App() {
@@ -48,31 +49,12 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path="/users/:id" element={<User />} />
+          <Route path="/posts/:id" element={<Post />} />
           <Route path="/albums/:id" element={<Album />} />
         </Routes>
       </BrowserRouter>
   </>
   );
-
-  // const route = window.location.pathname;
-
-  // if (route === '/') {
-  //   return (
-  //     <>
-  //       <Nav />
-  //       <Home />
-  //     </>
-  //   );
-  // }
-  // if (route === '/albums/') {
-  //   return (
-  //     <>
-  //       <Nav />
-  //       <Album />
-  //     </>
-  //   )
-  // }
-  // return(<><Home/></>);
 }
 
 export default App;

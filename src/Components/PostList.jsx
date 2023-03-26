@@ -23,6 +23,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import PostComments from "./PostComments";
 import UserHeader from "./UserHeader";
 import CommentsBadge from "./CommentsBadge";
+import { Button } from "@mui/material";
 // import Badge from '@mui/material/Badge';
 
 function PostList() {
@@ -45,17 +46,17 @@ function PostList() {
     .then((response) => response.json())
     .then((json) => {setPosts(json);});
   }
-  const handleMouseEnter = (id) => {
-    // document.getElementById(id+"user").style.backgroundColor = 'gray';
-    // document.getElementById(id+"user").style.color = 'white';
-    document.getElementById(id+"post").style.cursor = 'pointer';
- };
+//   const handleMouseEnter = (id) => {
+//     // document.getElementById(id+"user").style.backgroundColor = 'gray';
+//     // document.getElementById(id+"user").style.color = 'white';
+//     document.getElementById(id+"post").style.cursor = 'pointer';
+//  };
  
-  const handleMouseLeave = (id) => {
-    // document.getElementById(id+"user").style.backgroundColor = null;
-    // document.getElementById(id+"user").style.color = null;
-    document.getElementById(id+"post").style.cursor = null;
-  };
+//   const handleMouseLeave = (id) => {
+//     // document.getElementById(id+"user").style.backgroundColor = null;
+//     // document.getElementById(id+"user").style.color = null;
+//     document.getElementById(id+"post").style.cursor = null;
+//   };
   // function getUser(id) {
   //   let name = fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
   //   .then((response) => response.json())
@@ -69,6 +70,10 @@ function PostList() {
     } else {
       document.getElementById(id+"like").style.fill = null;
     }
+  }
+  const handleViewPost = (id) => {
+    // console.log(id);
+    window.location.href = '/posts/'+id;
   }
   const handleExpandClick = (id) => {
     if (expandIndex === id) {
@@ -101,11 +106,16 @@ function PostList() {
             return (
             <>
               <Card
-                sx={{ maxWidth: 400 }}
+                sx={{ 
+                  maxWidth: 400,
+                  '&:hover': {
+                    cursor: 'pointer',
+                  }
+                }}
                 key={post.id+"post"}
                 id={post.id+"post"}
-                onMouseEnter={() => handleMouseEnter(post.id)}
-                onMouseLeave={() => handleMouseLeave(post.id)}
+                // onMouseEnter={() => handleMouseEnter(post.id)}
+                // onMouseLeave={() => handleMouseLeave(post.id)}
               >
                 {/* <CardHeader
                   avatar={
@@ -122,7 +132,7 @@ function PostList() {
                   title={post.title}
                   subheader={user.username}
                 /> */}
-                <UserHeader postTitle={post.title} userId={post.userId}/>
+                <UserHeader postTitle={post.title} userId={post.userId} inPost={false}/>
                 {/* <CardMedia
                   component="img"
                   height="194"
@@ -138,6 +148,7 @@ function PostList() {
                   <IconButton aria-label="add to favorites" onClick={() => handleLike(post.id)}>
                     <FavoriteIcon id={post.id+"like"}/>
                   </IconButton>
+                  <Button onClick={() => handleViewPost(post.id)}>View Post</Button>
                   {/* <IconButton aria-label="comment">
                     <CommentIcon />
                   </IconButton> */}

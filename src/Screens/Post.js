@@ -1,21 +1,19 @@
 import React from "react";
 import Box from '@mui/material/Box';
 import UserList from "../Components/UserList";
-import PhotoList from "../Components/PhotoList";
+import PostCard from "../Components/PostCard"
 
-
-
-function Album() {
+function Post() {
   return(
     <>
       <div style={{width: '100vw', minHeight: '100vh', backgroundColor: '#E7EAEA', zIndex: '-2'}}>
         <Box sx={{ width: '100vw', paddingTop: '85px', paddingBottom: '20px', paddingLeft: '20px', paddingRight: '20px', display: 'flex', gap: '20px', justifyContent: 'center' }}>
           <UserList />
-          <PhotoList />
+          <PostCard />
         </Box>
       </div>
     </>
   );
-};
+}
 
-export default Album;
+export default Post;
