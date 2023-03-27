@@ -8,9 +8,11 @@ import Avatar from '@mui/material/Avatar';
 import PhotoCameraBackIcon from '@mui/icons-material/PhotoCameraBack';
 import Owner from "./Owner";
 import PropTypes from 'prop-types';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function AlbumsList(props) {
   const [albums, setAlbums] = React.useState([]);
+  const [loding, setLoding] = React.useState(true);
   useEffect(() => {
     if (props.userAlbums) {
       getUserAlbums();
@@ -21,12 +23,12 @@ function AlbumsList(props) {
   async function getAlbums() {
     await fetch('https://jsonplaceholder.typicode.com/albums')
     .then((response) => response.json())
-    .then((json) => {setAlbums(json);});
+    .then((json) => {setLoding(false);setAlbums(json);});
   }
   async function getUserAlbums() {
     await fetch(`https://jsonplaceholder.typicode.com/users/${props.userId}/albums`)
     .then((response) => response.json())
-    .then((json) => {setAlbums(json);});
+    .then((json) => {setLoding(false);setAlbums(json);});
   }
   function lookAlbum(id) {
     window.location.href = '/albums/'+id;
@@ -34,6 +36,13 @@ function AlbumsList(props) {
   return(
     <>
       <List sx={{ width: '100%', height: props.albums?'100%':'calc((100vh - 150px)/2.5)', borderRadius: '5px', maxWidth: props.notHome?1000:300, bgcolor: 'background.paper', overflow: props.notHome?null:'scroll', position: props.notHome?null:'sticky', top: props.notHome?null:'calc((100vh - 150px)/2.5 + 90px)' }}>
+        {loding
+          ?
+          <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
+            <CircularProgress color="inherit" />
+          </div>
+          : null
+        }
         {albums?.map((album) => (
           <>
             {(album.id !== 1)? <Divider variant="inset" component="li" />:null}

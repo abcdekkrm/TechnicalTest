@@ -9,9 +9,11 @@ import Typography from '@mui/material/Typography';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import Owner from "./Owner";
 import PropTypes from 'prop-types';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function ToDoList(props) {
   const [toDos, setToDos] = React.useState([]);
+  const [loding, setLoding] = React.useState(true);
   useEffect(() => {
     if (props.userToDo) getUserToDos();
     else getToDos();
@@ -19,16 +21,23 @@ function ToDoList(props) {
   async function getToDos() {
     await fetch('https://jsonplaceholder.typicode.com/todos')
     .then((response) => response.json())
-    .then((json) => {setToDos(json);});
+    .then((json) => {setLoding(false);setToDos(json);});
   }
   async function getUserToDos() {
     await fetch(`https://jsonplaceholder.typicode.com/users/${props.userId}/todos`)
     .then((response) => response.json())
-    .then((json) => {setToDos(json);});
+    .then((json) => {setLoding(false);setToDos(json);});
   }
   return(
     <>
       <List sx={{ width: '100%', height: props.toDos?'100%':'calc((100vh - 150px)/2.5)', borderRadius: '5px', maxWidth: props.notHome?1000:300, bgcolor: 'background.paper', overflow: props.notHome?null:'scroll', position: props.notHome?null:'sticky', top: props.notHome?null:'70px' }}>
+        {loding
+          ?
+          <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
+            <CircularProgress color="inherit" />
+          </div>
+          : null
+        }
         {toDos?.map((todo) => (
           <>
             {(todo.id !== 1)? <Divider variant="inset" component="li" />:null}

@@ -5,10 +5,12 @@ import ImageListItem from '@mui/material/ImageListItem';
 import Typography from '@mui/material/Typography';
 import { Box } from "@material-ui/core";
 import ImageListItemBar from '@mui/material/ImageListItemBar';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function PhotoList() {
   let { id } = useParams();
   const height = window.document.body.offsetHeight;
+  const [loding, setLoding] = React.useState(true);
   const [images, setImages] = React.useState([]);
   const [viewImg, setViewImg] = React.useState('');
   const [view, setView] = React.useState(false);
@@ -18,7 +20,7 @@ function PhotoList() {
   function getImages() {
     fetch(`https://jsonplaceholder.typicode.com/albums/${id}/photos`)
     .then((response) => response.json())
-    .then((json) => {setImages(json);});
+    .then((json) => {setLoding(false);setImages(json);});
   }
   const handleMouseEnter = (id) => {
     document.getElementById(id+"img").style.cursor = 'pointer';
@@ -58,6 +60,13 @@ function PhotoList() {
       <Box sx={{display: 'flex', flexDirection: 'column', gap: '10px' }}>
         <Typography variant="h5">Album {id}</Typography>
         <ImageList sx={{ width: 690, height: '100vh' }} cols={3} rowHeight={230}>
+          {loding
+            ?
+            <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
+              <CircularProgress color="inherit" />
+            </div>
+            : null
+          }
           {images.map((image) => {
             return(
               <>

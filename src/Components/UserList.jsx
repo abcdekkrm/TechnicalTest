@@ -7,22 +7,31 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function UserList() {
   const [users, setUsers] = React.useState([]);
+  const [loding, setLoding] = React.useState(true);
   useEffect(() => {
     getUsers();
   });
   function getUsers() {
     fetch('https://jsonplaceholder.typicode.com/users')
     .then((response) => response.json())
-    .then((json) => {setUsers(json);});
+    .then((json) => {setLoding(false);setUsers(json);});
   }
   const getUser = (id) => {
     window.location.href = '/users/'+id;
   }
   return (
     <List sx={{ width: '100%', height: 'calc(100vh/1.3)', borderRadius: '5px', maxWidth: 300, bgcolor: 'background.paper', overflow: 'scroll', position: 'sticky', top: '70px' }}>
+      {loding
+        ?
+        <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
+          <CircularProgress color="inherit" />
+        </div>
+        : null
+      }
       {users?.map((user) => (
         <>
           {(user.id !== 1)? <Divider variant="inset" component="li" />:null}
