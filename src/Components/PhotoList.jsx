@@ -50,12 +50,14 @@ function PhotoList() {
             style={{width: '100vw', height: height, backgroundColor: 'black', opacity: '0.5', position: 'absolute', zIndex: 900, top: '0' }} >
           </div>
           <Box sx={{ width: '100vw', height: height, position: 'absolute', zIndex: 1000 }}>
+            <div style={{width: '100vw', overflow: 'scroll'}}>
             <img
                 src={viewImg}
                 alt="thumbnail"
                 loading="lazy"
-                style={{ position: 'absolute', zIndex: 1000 }}
+                style={{ position: 'absolute', zIndex: 1000, width: '100vw', overflow: 'scroll' }}
             />
+            </div>
           </Box>
         </>
         : null
