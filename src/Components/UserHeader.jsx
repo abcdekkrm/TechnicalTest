@@ -30,7 +30,6 @@ function UserHeader(props) {
           avatar={
             <div onClick={handleViewUser}>
               <Avatar sx={{ bgcolor: red[500], '&:hover': {cursor: 'pointer'} }} aria-label="user">
-                {/* {Array.from(user.username)[0]} */}
                 {user.username?Array.from(user.username)[0]:null}
               </Avatar>
             </div>

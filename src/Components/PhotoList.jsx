@@ -11,6 +11,7 @@ import { useMediaQuery } from 'react-responsive';
 function PhotoList() {
   let { id } = useParams();
   const isTablet = useMediaQuery({ query: '(max-width: 768px)' });
+  const isMobile = useMediaQuery({ query: '(max-width: 425px)' });
   const height = window.document.body.offsetHeight;
   const [loding, setLoding] = React.useState(true);
   const [images, setImages] = React.useState([]);
@@ -61,7 +62,7 @@ function PhotoList() {
       }
       <Box sx={{display: 'flex', flexDirection: 'column', gap: '10px' }}>
         <Typography variant="h5">Album {id}</Typography>
-        <ImageList sx={{ width: isTablet?450:690, height: '100vh' }} cols={3} rowHeight={isTablet?'20vw':150}>
+        <ImageList sx={{ width: isTablet?isMobile?300:450:690, height: '100vh' }} cols={isMobile?2:3} rowHeight={isTablet?150:230}>
           {loding
             ?
             <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>

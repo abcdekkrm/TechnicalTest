@@ -7,6 +7,7 @@ import UserListDrawer from "../Components/UserListDrawer";
 
 
 function Posts() {
+  const isMobile = useMediaQuery({ query: '(max-width: 425px)' });
   const isTablet = useMediaQuery({ query: '(max-width: 768px)' });
   return(
     <>
@@ -14,11 +15,13 @@ function Posts() {
         <Box sx={{ width: '100vw', paddingTop: '85px', paddingBottom: '20px', display: 'flex', gap: '20px', justifyContent: 'center' }}>
           {isTablet
             ?
+            isMobile ? null
+            :
             <UserListDrawer />
             :
             <UserList />
           }
-          <Box sx={{width: '60vw', minWidth: '350px'}}>
+          <Box sx={{width: isMobile?'95vw':'60vw', minWidth: isMobile?'90vw':'350px'}}>
             <PostList notHome={true} userPosts={false} Posts={true}/>
           </Box>
         </Box>

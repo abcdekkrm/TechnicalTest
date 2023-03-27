@@ -13,6 +13,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useMediaQuery } from 'react-responsive';
 
 export default function MediaCard() {
+  const isMobile = useMediaQuery({ query: '(max-width: 425px)' });
   const isTablet = useMediaQuery({ query: '(max-width: 768px)' });
   let { id } = useParams();
   const [loding, setLoding] = React.useState(true);
@@ -26,7 +27,7 @@ export default function MediaCard() {
     .then((json) => {setLoding(false);setPost(json);});
   }
   return (
-    <Card sx={{ maxWidth: isTablet?450:690, height: '100%' }}>
+    <Card sx={{ maxWidth: isTablet?isMobile?'100vw':450:690, height: isMobile?'calc(100vh - 65px)':'100%',  overflow: isMobile?'scroll':null }}>
       {loding
         ?
         <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>

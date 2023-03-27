@@ -8,8 +8,10 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useMediaQuery } from 'react-responsive';
 
 function UserList() {
+  const isMobile = useMediaQuery({ query: '(max-width: 425px)' });
   const [users, setUsers] = React.useState([]);
   const [loding, setLoding] = React.useState(true);
   useEffect(() => {
@@ -24,7 +26,7 @@ function UserList() {
     window.location.href = '/users/'+id;
   }
   return (
-    <List sx={{ width: '100%', height: 'calc(100vh/1.3)', borderRadius: '5px', maxWidth: 300, bgcolor: 'background.paper', overflow: 'scroll', position: 'sticky', top: '70px' }}>
+    <List sx={{ width: '100%', height: isMobile?'100%':'calc(100vh/1.3)', borderRadius: '5px', maxWidth: isMobile?null:300, bgcolor: 'background.paper', overflow: isMobile?null:'scroll', position: 'sticky', top: '70px' }}>
       {loding
         ?
         <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>

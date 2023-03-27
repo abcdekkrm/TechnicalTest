@@ -9,6 +9,7 @@ import UserListDrawer from "../Components/UserListDrawer";
 
 
 function ToDos() {
+  const isMobile = useMediaQuery({ query: '(max-width: 425px)' });
   const isTablet = useMediaQuery({ query: '(max-width: 768px)' });
   return(
     <>
@@ -16,12 +17,14 @@ function ToDos() {
         <Box sx={{ width: '100vw', paddingTop: '85px', paddingBottom: '20px', display: 'flex', gap: '20px', justifyContent: 'center' }}>
           {isTablet
             ?
+            isMobile ? null
+            :
             <UserListDrawer />
             :
             <UserList />
           }
-          <Box sx={{width: '60vw', minWidth: '350px', display: 'flex', gap: '15px', flexDirection: 'column'}}>
-            <Typography variant="h5" style={{position: 'sticky', top:  '65px', zIndex: 500, backgroundColor: '#E7EAEA', width: '100%'}}>TODO</Typography>
+          <Box sx={{width: isMobile?'95vw':'60vw', minWidth: isMobile?'90vw':'350px', display: 'flex', gap: '15px', flexDirection: 'column'}}>
+            <Typography variant={isMobile?"subtitle1":"h5"} style={{position: 'sticky', top:  '65px', zIndex: 500, backgroundColor: '#E7EAEA', width: '100%'}}>TODO</Typography>
             <ToDoList notHome={true} toDos={true}/>
           </Box>
         </Box>
