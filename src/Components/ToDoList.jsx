@@ -30,7 +30,7 @@ function ToDoList(props) {
   }
   return(
     <>
-      <List sx={{ width: '100%', height: props.toDos?'100%':'calc((100vh - 150px)/2.5)', borderRadius: '5px', maxWidth: props.notHome?1000:300, bgcolor: 'background.paper', overflow: props.notHome?null:'scroll', position: props.notHome?null:'sticky', top: props.notHome?null:'70px' }}>
+      <List sx={{ width: '100%', height: props.toDos?'100%':'calc((100vh - 150px)/2.5)', borderRadius: '5px', maxWidth: props.notHome?1000:300, bgcolor: 'background.paper', overflow: props.toDos?null:'scroll', position: props.notHome?null:'sticky', top: props.notHome?null:'70px' }}>
         {loding
           ?
           <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>

@@ -35,7 +35,7 @@ function AlbumsList(props) {
   }
   return(
     <>
-      <List sx={{ width: '100%', height: props.albums?'100%':'calc((100vh - 150px)/2.5)', borderRadius: '5px', maxWidth: props.notHome?1000:300, bgcolor: 'background.paper', overflow: props.notHome?null:'scroll', position: props.notHome?null:'sticky', top: props.notHome?null:'calc((100vh - 150px)/2.5 + 90px)' }}>
+      <List sx={{ width: '100%', height: props.albums?'100%':'calc((100vh - 150px)/2.5)', borderRadius: '5px', maxWidth: props.notHome?1000:300, bgcolor: 'background.paper', overflow: props.albums?null:'scroll', position: props.notHome?null:'sticky', top: props.notHome?null:'calc((100vh - 150px)/2.5 + 90px)' }}>
         {loding
           ?
           <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
