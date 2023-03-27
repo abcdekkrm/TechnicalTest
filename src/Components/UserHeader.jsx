@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
 import { red } from '@mui/material/colors';
-// import MoreVertIcon from '@mui/icons-material/MoreVert';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -50,17 +49,10 @@ function UserHeader(props) {
           avatar={
             <div onClick={handleViewUser}>
               <Avatar sx={{ bgcolor: red[500], '&:hover': {cursor: 'pointer'} }} aria-label="user">
-                {/* {Array.from(user.username)[0]} */}
                 {user.username?Array.from(user.username)[0]:null}
               </Avatar>
             </div>
           }
-          // action={
-          //   <IconButton aria-label="settings">
-          //     <MoreVertIcon />
-          //   </IconButton>
-          // }
-          // titleTypographyProps={{variant:'h6' }}
           title={props.postTitle}
           subheader={user.username}
         />

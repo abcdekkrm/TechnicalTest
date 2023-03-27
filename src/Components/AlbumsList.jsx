@@ -33,7 +33,7 @@ function AlbumsList(props) {
   }
   return(
     <>
-      <List sx={{ width: '100%', height: props.albums?'60%':'calc((100vh - 150px)/2.5)', borderRadius: '5px', maxWidth: props.notHome?1000:300, bgcolor: 'background.paper', overflow: 'scroll', position: 'sticky', top: 'calc((100vh - 150px)/2.5 + 90px)' }}>
+      <List sx={{ width: '100%', height: props.albums?'100%':'calc((100vh - 150px)/2.5)', borderRadius: '5px', maxWidth: props.notHome?1000:300, bgcolor: 'background.paper', overflow: props.notHome?null:'scroll', position: props.notHome?null:'sticky', top: props.notHome?null:'calc((100vh - 150px)/2.5 + 90px)' }}>
         {albums?.map((album) => (
           <>
             {(album.id !== 1)? <Divider variant="inset" component="li" />:null}

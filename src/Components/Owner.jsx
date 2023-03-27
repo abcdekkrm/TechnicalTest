@@ -11,22 +11,9 @@ function Owner(props) {
     await fetch(`https://jsonplaceholder.typicode.com/users/${props.userId}`)
     .then((response) => response.json())
     .then((json) => {setUser(json)});
-    // console.log(user);
   }
   return(
     <>
-      {/* {user.username
-        ?
-        <Typography
-          sx={{ display: 'inline' }}
-          component="span"
-          variant="body2"
-          color="whitesmike"
-        >
-          {user.username}
-        </Typography>
-        : null
-      } */}
       <Typography
           sx={{ display: 'inline' }}
           component="span"

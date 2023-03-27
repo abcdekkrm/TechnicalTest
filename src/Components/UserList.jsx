@@ -9,15 +9,9 @@ import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 
 function UserList() {
-  // const colors = [];
-  // for (var i = 0; i < 26; i++) {
-  //   colors.push(Math.floor(Math.random()*16777215).toString(16));
-  // }
   const [users, setUsers] = React.useState([]);
-  // const [isFirst, setIsFirst] = React.useState(true);
   useEffect(() => {
     getUsers();
-    // console.log(colors);
   });
   function getUsers() {
     fetch('https://jsonplaceholder.typicode.com/users')
@@ -27,42 +21,15 @@ function UserList() {
   const getUser = (id) => {
     window.location.href = '/users/'+id;
   }
-//   const handleMouseEnter = (id) => {
-//     document.getElementById(id+"user").style.backgroundColor = 'gray';
-//     document.getElementById(id+"user").style.color = 'white';
-//     document.getElementById(id+"user").style.cursor = 'pointer';
-//  };
- 
-//   const handleMouseLeave = (id) => {
-//     document.getElementById(id+"user").style.backgroundColor = null;
-//     document.getElementById(id+"user").style.color = null;
-//     document.getElementById(id+"user").style.cursor = null;
-//   };
-
-  // const randomColors = () => {
-  //   for (int = 0; i < 26; i++) {
-  //     colors.push(Math.floor(Math.random()*16777215).toString(16));
-  //   }
-  // }
-  // const colours = () ;
-  // const getColour = () => colours[Math.floor(Math.random() * colours.length)];
-  // function stringToHslColor(name) {
-
-  // }
   return (
     <List sx={{ width: '100%', height: 'calc(100vh/1.3)', borderRadius: '5px', maxWidth: 300, bgcolor: 'background.paper', overflow: 'scroll', position: 'sticky', top: '70px' }}>
       {users?.map((user) => (
-        // if (user.id !== 1) {
-        //   setIsFirst(false);
-        // }
         <>
           {(user.id !== 1)? <Divider variant="inset" component="li" />:null}
           <ListItem
             alignItems="flex-start"
             key={user.id+"user"}
             id={user.id+"user"}
-            // onMouseEnter={() => handleMouseEnter(user.id)}
-            // onMouseLeave={() => handleMouseLeave(user.id)}
             onClick={() => getUser(user.id)}
             sx={{
               '&:hover': {
@@ -73,7 +40,6 @@ function UserList() {
             }}
           >
             <ListItemAvatar>
-              {/* <Avatar sx ={{backgroundColor: red[500]}}>{Array.from(user.username)[0]}</Avatar> */}
               <Avatar sx={{ bgcolor: blue[700] }} aria-label="recipe">
                 {Array.from(user.username)[0]}
               </Avatar>
@@ -91,7 +57,6 @@ function UserList() {
                     {user.name}
                   </Typography>
                   <Typography
-                    // component="span"
                     variant="body2"
                     color="text.primary"
                   >

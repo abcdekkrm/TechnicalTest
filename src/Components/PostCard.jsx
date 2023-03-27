@@ -3,8 +3,6 @@ import { useParams } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-// import CardMedia from '@mui/material/CardMedia';
-// import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Typography from '@mui/material/Typography';
@@ -27,12 +25,6 @@ export default function MediaCard() {
   }
   return (
     <Card sx={{ maxWidth: 690, height: '100%' }}>
-      
-      {/* <CardMedia
-        sx={{ height: 140 }}
-        image="/static/images/cards/contemplative-reptile.jpg"
-        title="green iguana"
-      /> */}
       {loding
         ?
         <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
@@ -53,8 +45,6 @@ export default function MediaCard() {
         <IconButton aria-label="add to favorites" >
           <FavoriteIcon />
         </IconButton>
-        {/* <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button> */}
       </CardActions>
       <Divider variant='middle'/>
       <PostComments postId={id} />

@@ -3,7 +3,7 @@ import AlbumsList from "../Components/AlbumsList";
 import PostList from "../Components/PostList";
 import ToDoList from "../Components/ToDoList";
 import UserList from "../Components/UserList";
-// #B1D6ED
+
 function Home() {
   return(
     <>
@@ -12,7 +12,7 @@ function Home() {
           <UserList />
           <PostList notHome={false} />
           <div style={{display: 'flex', flexDirection: 'column', gap: '20px'}}>
-            <ToDoList inUser={false}/>
+            <ToDoList notHome={false}/>
             <AlbumsList notHome={false} userAlbums={false} />
           </div>
         </div>
