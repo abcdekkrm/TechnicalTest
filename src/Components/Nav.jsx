@@ -18,6 +18,10 @@ export default function DenseAppBar() {
     window.location.href = '/albums';
     // console.log('click');
   }
+  const handlePosts = () => {
+    window.location.href = '/posts';
+    // console.log('click');
+  }
   return (
     <Box sx={{ flexGrow: 1, position: 'fixed', width: '100vw', zIndex: '50' }}>
       <AppBar position="static" sx={{ height: '65px', bgcolor: 'background.paper', justifyContent: 'center', boxShadow: 'none'}}>
@@ -36,7 +40,7 @@ export default function DenseAppBar() {
               Albums
             </Button>
             <Button
-              onClick={handleHome}
+              onClick={handlePosts}
               sx={{ my: 2, color: 'black', display: 'block' }}
             >
               Posts

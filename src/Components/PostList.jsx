@@ -37,7 +37,7 @@ function PostList(props) {
   // const [isFirst, setIsFirst] = React.useState(true);
   useEffect(() => {
     // getUsers();
-    if (props.inUser) getUserPosts();
+    if (props.noyHome) getUserPosts();
     else getPosts();
   });
   async function getUserPosts() {
@@ -93,7 +93,44 @@ function PostList(props) {
             // const user = users[post.userId - 1];
             return (
             <>
-              {props.inUser
+              <Card
+                sx={{ 
+                  maxWidth: props.notHome?null:400,
+                }}
+                key={post.id+"post"}
+                id={post.id+"post"}
+              >
+                <UserHeader postTitle={post.title} userId={post.userId} inPost={false}/>
+                <CardContent>
+                  <Typography variant="body2" color="text.secondary">
+                    {post.body}
+                  </Typography>
+                </CardContent>
+                <CardActions disableSpacing>
+                  <IconButton aria-label="add to favorites" onClick={() => handleLike(post.id)}>
+                    <FavoriteIcon id={post.id+"like"}/>
+                  </IconButton>
+                  <Button onClick={() => handleViewPost(post.id)}>
+                    View Post
+                  </Button>
+                  <ExpandMore
+                    // id={post.id+"expand"}
+                    // expand={expanded}
+                    expand={post.id === expandIndex}
+                    onClick={() => handleExpandClick(post.id)}
+                    // aria-expanded={expanded}
+                    aria-expanded={post.id === expandIndex}
+                    aria-label="show more"
+                  >
+                    {/* <CommentIcon /> */}
+                    <CommentsBadge postId={post.id} />
+                  </ExpandMore>
+                </CardActions>
+                <Collapse id={post.id+"collapse"} in={post.id === expandIndex} timeout="auto" unmountOnExit>
+                  <PostComments postId={post.id} />
+                </Collapse>
+              </Card>
+              {/* {props.noyHome
                 ?
                 <Card
                   key={post.id+"post"}
@@ -121,7 +158,6 @@ function PostList(props) {
                       aria-expanded={post.id === expandIndex}
                       aria-label="show more"
                     >
-                      {/* <CommentIcon /> */}
                       <CommentsBadge postId={post.id} />
                     </ExpandMore>
                   </CardActions>
@@ -159,7 +195,6 @@ function PostList(props) {
                       aria-expanded={post.id === expandIndex}
                       aria-label="show more"
                     >
-                      {/* <CommentIcon /> */}
                       <CommentsBadge postId={post.id} />
                     </ExpandMore>
                   </CardActions>
@@ -167,7 +202,7 @@ function PostList(props) {
                     <PostComments postId={post.id} />
                   </Collapse>
                 </Card>
-              }
+              } */}
             </>);
           }
         )}
@@ -178,7 +213,7 @@ function PostList(props) {
 
 PostList.propTypes = {
   userId: PropTypes.number,
-  inUser: PropTypes.bool,
+  noyHome: PropTypes.bool,
 }
 
 export default PostList;

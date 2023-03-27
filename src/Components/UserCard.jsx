@@ -185,7 +185,7 @@ export default function MediaCard() {
                   <NewspaperIcon />
                   User's Post
                 </Typography>
-                <PostList userId={id} inUser={true}/>
+                <PostList userId={id} notHome={true}/>
               </Box>
             </CardContent>
           </Box>

@@ -24,7 +24,7 @@ function PostComments(props) {
   }
   return (
     <>
-      <CardContent>
+      <CardContent sx={{maxHeight: "60vh", overflow: 'scroll'}}>
         {loding
           ?
           <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
@@ -36,7 +36,6 @@ function PostComments(props) {
           {comments?.map((comment) => {
             return(
               <>
-                {(comment.id !== 1)?<Divider variant="inset" component="li" />:null}
                 <ListItem alignItems="flex-start">
                   <ListItemAvatar>
                     <Avatar sx={{ bgcolor: green[500] }} aria-label="recipe">
@@ -57,7 +56,6 @@ function PostComments(props) {
                           {comment.email}
                         </Typography>
                         <Typography
-                          // component="span"
                           variant="body2"
                           color="whitesmike"
                         >
@@ -67,6 +65,7 @@ function PostComments(props) {
                     }
                   />
                 </ListItem>
+                <Divider variant="inset" component="li" />
               </>
             );
           })}

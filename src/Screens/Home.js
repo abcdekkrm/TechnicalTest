@@ -10,7 +10,7 @@ function Home() {
       <div style={{width: '100vw', backgroundColor: '#E7EAEA', zIndex: '-2'}}>
         <div style={{ paddingTop: '85px', paddingBottom: '20px', paddingLeft: '20px', paddingRight: '20px', display: 'flex', gap: '20px', justifyContent: 'center' }}>
           <UserList />
-          <PostList inUser={false} />
+          <PostList notHome={false} />
           <div style={{display: 'flex', flexDirection: 'column', gap: '20px'}}>
             <ToDoList inUser={false}/>
             <AlbumsList notHome={false} userAlbums={false} />

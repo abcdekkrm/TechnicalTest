@@ -57,7 +57,7 @@ export default function MediaCard() {
         <Button size="small">Learn More</Button> */}
       </CardActions>
       <Divider variant='middle'/>
-      <PostComments postId={id}/>
+      <PostComments postId={id} />
     </Card>
   );
 }
