@@ -10,8 +10,10 @@ import Divider from '@mui/material/Divider';
 import PostComments from './PostComments';
 import UserHeader from "./UserHeader";
 import CircularProgress from '@mui/material/CircularProgress';
+import { useMediaQuery } from 'react-responsive';
 
 export default function MediaCard() {
+  const isTablet = useMediaQuery({ query: '(max-width: 768px)' });
   let { id } = useParams();
   const [loding, setLoding] = React.useState(true);
   const [post, setPost] = React.useState('');
@@ -24,7 +26,7 @@ export default function MediaCard() {
     .then((json) => {setLoding(false);setPost(json);});
   }
   return (
-    <Card sx={{ maxWidth: 690, height: '100%' }}>
+    <Card sx={{ maxWidth: isTablet?450:690, height: '100%' }}>
       {loding
         ?
         <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>

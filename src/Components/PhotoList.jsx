@@ -6,9 +6,11 @@ import Typography from '@mui/material/Typography';
 import { Box } from "@material-ui/core";
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useMediaQuery } from 'react-responsive';
 
 function PhotoList() {
   let { id } = useParams();
+  const isTablet = useMediaQuery({ query: '(max-width: 768px)' });
   const height = window.document.body.offsetHeight;
   const [loding, setLoding] = React.useState(true);
   const [images, setImages] = React.useState([]);
@@ -59,7 +61,7 @@ function PhotoList() {
       }
       <Box sx={{display: 'flex', flexDirection: 'column', gap: '10px' }}>
         <Typography variant="h5">Album {id}</Typography>
-        <ImageList sx={{ width: 690, height: '100vh' }} cols={3} rowHeight={230}>
+        <ImageList sx={{ width: isTablet?450:690, height: '100vh' }} cols={3} rowHeight={isTablet?'20vw':150}>
           {loding
             ?
             <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>

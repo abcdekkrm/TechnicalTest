@@ -22,10 +22,11 @@ import { Box } from "@mui/material";
 import AlbumsList from "./AlbumsList";
 import ToDoList from "./ToDoList";
 import PostList from "./PostList";
-
+import { useMediaQuery } from 'react-responsive';
 
 export default function MediaCard() {
   let { id } = useParams();
+  const isTablet = useMediaQuery({ query: '(max-width: 768px)' });
   const [loding, setLoding] = React.useState(true);
   const [user, setUser] = React.useState('');
   useEffect(() => {
@@ -40,7 +41,7 @@ export default function MediaCard() {
     window.location.href = '/';
   }
   return (
-    <Card sx={{ minWidth: '50vw', maxWidth: 690, height: '100%' }}>
+    <Card sx={{ minWidth: '50vw', maxWidth: isTablet?450:690, height: '100%' }}>
       {loding
         ?
         <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>

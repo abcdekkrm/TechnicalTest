@@ -15,6 +15,7 @@ import PropTypes from 'prop-types';
 import CircularProgress from '@mui/material/CircularProgress';
 
 function PostList(props) {
+  // const isTablet = useMediaQuery({ query: '(max-width: 768px)' });
   const [loding, setLoding] = React.useState(true);
   const [posts, setPosts] = React.useState([]);
   const [expandIndex, setExpandIndex] = React.useState(-1);
