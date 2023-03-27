@@ -13,7 +13,7 @@ function Home() {
           <PostList inUser={false} />
           <div style={{display: 'flex', flexDirection: 'column', gap: '20px'}}>
             <ToDoList inUser={false}/>
-            <AlbumsList inUser={false} />
+            <AlbumsList notHome={false} userAlbums={false} />
           </div>
         </div>
       </div>

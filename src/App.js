@@ -6,6 +6,7 @@ import Nav from './Components/Nav'
 import Home from './Screens/Home';
 import User from './Screens/User';
 import Album from './Screens/Album';
+import Albums from './Screens/Albums'
 import Post from './Screens/Post';
 // import { Switch } from '@material-ui/core';
 
@@ -51,6 +52,7 @@ function App() {
           <Route path="/users/:id" element={<User />} />
           <Route path="/posts/:id" element={<Post />} />
           <Route path="/albums/:id" element={<Album />} />
+          <Route path="/albums/" element={<Albums />} />
         </Routes>
       </BrowserRouter>
   </>

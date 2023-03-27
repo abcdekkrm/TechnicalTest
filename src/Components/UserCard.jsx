@@ -169,7 +169,7 @@ export default function MediaCard() {
                     <PhotoCameraBackIcon />
                     Album
                   </Typography>
-                  <AlbumsList userId={id} inUser={true} />
+                  <AlbumsList userId={id} notHome={true} userAlbums={true} albums={false} />
                 </Box>
                 <Box sx={{display: 'flex', flexDirection: 'column', gap: '5px'}}>
                   <Typography variant="body1" color="text.secondary" sx={{display: 'flex', alignItems: 'center', marginTop: '10px', gap: '5px'}}>
