@@ -20,16 +20,21 @@ function UserHeader(props) {
   const handleClosePost = () => {
     window.location.href = '/';
   }
+  const handleViewUser = () => {
+    window.location.href = `/users/${props.userId}`;
+  }
   return(
     <>
       {props.inPost
         ?
         <CardHeader
           avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              {/* {Array.from(user.username)[0]} */}
-              {user.username?Array.from(user.username)[0]:null}
-            </Avatar>
+            <div onClick={handleViewUser}>
+              <Avatar sx={{ bgcolor: red[500], '&:hover': {cursor: 'pointer'} }} aria-label="user">
+                {/* {Array.from(user.username)[0]} */}
+                {user.username?Array.from(user.username)[0]:null}
+              </Avatar>
+            </div>
           }
           action={
             <IconButton aria-label="settings" onClick={handleClosePost}>
@@ -43,10 +48,12 @@ function UserHeader(props) {
         :
         <CardHeader
           avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              {/* {Array.from(user.username)[0]} */}
-              {user.username?Array.from(user.username)[0]:null}
-            </Avatar>
+            <div onClick={handleViewUser}>
+              <Avatar sx={{ bgcolor: red[500], '&:hover': {cursor: 'pointer'} }} aria-label="user">
+                {/* {Array.from(user.username)[0]} */}
+                {user.username?Array.from(user.username)[0]:null}
+              </Avatar>
+            </div>
           }
           // action={
           //   <IconButton aria-label="settings">

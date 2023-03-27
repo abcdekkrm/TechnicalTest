@@ -25,45 +25,31 @@ import UserHeader from "./UserHeader";
 import CommentsBadge from "./CommentsBadge";
 import { Button } from "@mui/material";
 // import Badge from '@mui/material/Badge';
+import PropTypes from 'prop-types';
+import CircularProgress from '@mui/material/CircularProgress';
 
-function PostList() {
+function PostList(props) {
   // const [users, setUsers] = React.useState([]);
+  const [loding, setLoding] = React.useState(true);
   const [posts, setPosts] = React.useState([]);
   const [expandIndex, setExpandIndex] = React.useState(-1);
 
   // const [isFirst, setIsFirst] = React.useState(true);
   useEffect(() => {
     // getUsers();
-    getPosts();
+    if (props.inUser) getUserPosts();
+    else getPosts();
   });
-  // async function getUsers() {
-  //   await fetch('https://jsonplaceholder.typicode.com/users')
-  //   .then((response) => response.json())
-  //   .then((json) => {setUsers(json);});
-  // }
+  async function getUserPosts() {
+    await fetch(`https://jsonplaceholder.typicode.com/users/${props.userId}/posts`)
+    .then((response) => response.json())
+    .then((json) => {setLoding(false);setPosts(json);});
+  }
   async function getPosts() {
     await fetch('https://jsonplaceholder.typicode.com/posts')
     .then((response) => response.json())
-    .then((json) => {setPosts(json);});
+    .then((json) => {setLoding(false);setPosts(json);});
   }
-//   const handleMouseEnter = (id) => {
-//     // document.getElementById(id+"user").style.backgroundColor = 'gray';
-//     // document.getElementById(id+"user").style.color = 'white';
-//     document.getElementById(id+"post").style.cursor = 'pointer';
-//  };
- 
-//   const handleMouseLeave = (id) => {
-//     // document.getElementById(id+"user").style.backgroundColor = null;
-//     // document.getElementById(id+"user").style.color = null;
-//     document.getElementById(id+"post").style.cursor = null;
-//   };
-  // function getUser(id) {
-  //   let name = fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
-  //   .then((response) => response.json())
-  //   .then((json) => {return json['name']});
-  //   console.log(name);
-  //   return id;
-  // }
   const handleLike = (id) => {
     if(document.getElementById(id+"like").style.fill !== 'red') {
       document.getElementById(id+"like").style.fill = 'red';
@@ -81,11 +67,6 @@ function PostList() {
     } else {
       setExpandIndex(id);
     }
-    // setExpanded(!expanded);
-    // document.getElementById(id+"expand").expand = !document.getElementById(id+"expand").expand;
-    // document.getElementById(id+"expand").ariaExpanded = !document.getElementById(id+"expand").ariaExpanded;
-    // document.getElementById(id+"collapse").in = !document.getElementById(id+"collapse").in;
-    // console.log(document.getElementById(id+"collapse"));
   };
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -99,93 +80,105 @@ function PostList() {
   }));
   return(
     <>
+      {loding
+        ?
+        <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
+          <CircularProgress color="inherit" />
+        </div>
+        : null
+      }
       <div style={{display: 'flex', flexDirection: 'column', gap: '20px'}}>
         {posts?.map(
           (post) => {
             // const user = users[post.userId - 1];
             return (
             <>
-              <Card
-                sx={{ 
-                  maxWidth: 400,
-                  '&:hover': {
-                    cursor: 'pointer',
-                  }
-                }}
-                key={post.id+"post"}
-                id={post.id+"post"}
-                // onMouseEnter={() => handleMouseEnter(post.id)}
-                // onMouseLeave={() => handleMouseLeave(post.id)}
-              >
-                {/* <CardHeader
-                  avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                      {Array.from(user.username)[0]}
-                    </Avatar>
-                  }
-                  action={
-                    <IconButton aria-label="settings">
-                      <MoreVertIcon />
+              {props.inUser
+                ?
+                <Card
+                  key={post.id+"post"}
+                  id={post.id+"post"}
+                >
+                  <UserHeader postTitle={post.title} userId={post.userId} inPost={false}/>
+                  <CardContent>
+                    <Typography variant="body2" color="text.secondary">
+                      {post.body}
+                    </Typography>
+                  </CardContent>
+                  <CardActions disableSpacing>
+                    <IconButton aria-label="add to favorites" onClick={() => handleLike(post.id)}>
+                      <FavoriteIcon id={post.id+"like"}/>
                     </IconButton>
-                  }
-                  // titleTypographyProps={{variant:'h6' }}
-                  title={post.title}
-                  subheader={user.username}
-                /> */}
-                <UserHeader postTitle={post.title} userId={post.userId} inPost={false}/>
-                {/* <CardMedia
-                  component="img"
-                  height="194"
-                  image="/static/images/cards/paella.jpg"
-                  alt="Paella dish"
-                /> */}
-                <CardContent>
-                  <Typography variant="body2" color="text.secondary">
-                    {post.body}
-                  </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                  <IconButton aria-label="add to favorites" onClick={() => handleLike(post.id)}>
-                    <FavoriteIcon id={post.id+"like"}/>
-                  </IconButton>
-                  <Button onClick={() => handleViewPost(post.id)}>View Post</Button>
-                  {/* <IconButton aria-label="comment">
-                    <CommentIcon />
-                  </IconButton> */}
-                  {/* <Badge badgeContent={4} color="primary">
-                    <CommentIcon sx={{ fill: '#757576' }}/>
-                  </Badge> */}
-                  {/* <ExpandMore
-                    expand={expanded}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                  >
-                    <ExpandMoreIcon />
-                  </ExpandMore> */}
-                  <ExpandMore
-                    // id={post.id+"expand"}
-                    // expand={expanded}
-                    expand={post.id === expandIndex}
-                    onClick={() => handleExpandClick(post.id)}
-                    // aria-expanded={expanded}
-                    aria-expanded={post.id === expandIndex}
-                    aria-label="show more"
-                  >
-                    {/* <CommentIcon /> */}
-                    <CommentsBadge postId={post.id} />
-                  </ExpandMore>
-                </CardActions>
-                <Collapse id={post.id+"collapse"} in={post.id === expandIndex} timeout="auto" unmountOnExit>
-                  <PostComments postId={post.id} />
-                </Collapse>
-              </Card>
+                    <Button onClick={() => handleViewPost(post.id)}>
+                      View Post
+                    </Button>
+                    <ExpandMore
+                      // id={post.id+"expand"}
+                      // expand={expanded}
+                      expand={post.id === expandIndex}
+                      onClick={() => handleExpandClick(post.id)}
+                      // aria-expanded={expanded}
+                      aria-expanded={post.id === expandIndex}
+                      aria-label="show more"
+                    >
+                      {/* <CommentIcon /> */}
+                      <CommentsBadge postId={post.id} />
+                    </ExpandMore>
+                  </CardActions>
+                  <Collapse id={post.id+"collapse"} in={post.id === expandIndex} timeout="auto" unmountOnExit>
+                    <PostComments postId={post.id} />
+                  </Collapse>
+                </Card>
+                :
+                <Card
+                  sx={{ 
+                    maxWidth: 400,
+                  }}
+                  key={post.id+"post"}
+                  id={post.id+"post"}
+                >
+                  <UserHeader postTitle={post.title} userId={post.userId} inPost={false}/>
+                  <CardContent>
+                    <Typography variant="body2" color="text.secondary">
+                      {post.body}
+                    </Typography>
+                  </CardContent>
+                  <CardActions disableSpacing>
+                    <IconButton aria-label="add to favorites" onClick={() => handleLike(post.id)}>
+                      <FavoriteIcon id={post.id+"like"}/>
+                    </IconButton>
+                    <Button onClick={() => handleViewPost(post.id)}>
+                      View Post
+                    </Button>
+                    <ExpandMore
+                      // id={post.id+"expand"}
+                      // expand={expanded}
+                      expand={post.id === expandIndex}
+                      onClick={() => handleExpandClick(post.id)}
+                      // aria-expanded={expanded}
+                      aria-expanded={post.id === expandIndex}
+                      aria-label="show more"
+                    >
+                      {/* <CommentIcon /> */}
+                      <CommentsBadge postId={post.id} />
+                    </ExpandMore>
+                  </CardActions>
+                  <Collapse id={post.id+"collapse"} in={post.id === expandIndex} timeout="auto" unmountOnExit>
+                    <PostComments postId={post.id} />
+                  </Collapse>
+                </Card>
+              }
             </>);
           }
         )}
       </div>
     </>
   );
+}
+
+PostList.propTypes = {
+  userId: PropTypes.number,
+  inUser: PropTypes.bool,
 }
 
 export default PostList;

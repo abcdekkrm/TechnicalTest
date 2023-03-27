@@ -25,20 +25,19 @@ function UserList() {
     .then((json) => {setUsers(json);});
   }
   const getUser = (id) => {
-    console.log(id);
     window.location.href = '/users/'+id;
   }
-  const handleMouseEnter = (id) => {
-    document.getElementById(id+"user").style.backgroundColor = 'gray';
-    document.getElementById(id+"user").style.color = 'white';
-    document.getElementById(id+"user").style.cursor = 'pointer';
- };
+//   const handleMouseEnter = (id) => {
+//     document.getElementById(id+"user").style.backgroundColor = 'gray';
+//     document.getElementById(id+"user").style.color = 'white';
+//     document.getElementById(id+"user").style.cursor = 'pointer';
+//  };
  
-  const handleMouseLeave = (id) => {
-    document.getElementById(id+"user").style.backgroundColor = null;
-    document.getElementById(id+"user").style.color = null;
-    document.getElementById(id+"user").style.cursor = null;
-  };
+//   const handleMouseLeave = (id) => {
+//     document.getElementById(id+"user").style.backgroundColor = null;
+//     document.getElementById(id+"user").style.color = null;
+//     document.getElementById(id+"user").style.cursor = null;
+//   };
 
   // const randomColors = () => {
   //   for (int = 0; i < 26; i++) {
@@ -62,9 +61,16 @@ function UserList() {
             alignItems="flex-start"
             key={user.id+"user"}
             id={user.id+"user"}
-            onMouseEnter={() => handleMouseEnter(user.id)}
-            onMouseLeave={() => handleMouseLeave(user.id)}
+            // onMouseEnter={() => handleMouseEnter(user.id)}
+            // onMouseLeave={() => handleMouseLeave(user.id)}
             onClick={() => getUser(user.id)}
+            sx={{
+              '&:hover': {
+                backgroundColor: 'gray',
+                color: 'white',
+                cursor: 'pointer',
+              }
+            }}
           >
             <ListItemAvatar>
               {/* <Avatar sx ={{backgroundColor: red[500]}}>{Array.from(user.username)[0]}</Avatar> */}
