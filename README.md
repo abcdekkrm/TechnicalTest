@@ -1,3 +1,12 @@
+# Web Flow Chart
+
+![plot](FlowDiagram.png)
+
+# Install
+
+### `npm install`
+Install all using packeges before run
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
